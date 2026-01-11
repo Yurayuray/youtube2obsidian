@@ -26,7 +26,7 @@ def run(
     language: str = typer.Option("ja", "--lang", help="処理・出力言語"),
     overwrite: bool = typer.Option(False, "--overwrite", help="既存ノートを上書き"),
     include_transcript: bool = typer.Option(
-        False, "--include-transcript", help="Markdownに全文トランスクリプトを含める"
+        True, "--include-transcript/--no-include-transcript", help="Markdownに全文トランスクリプトを含める（デフォルトで含める）"
     ),
     no_openai: bool = typer.Option(False, "--no-openai", help="要約をスキップして全文だけ保存"),
 ) -> None:

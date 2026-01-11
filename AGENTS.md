@@ -2,6 +2,7 @@
 
 ## Project Scope
 エージェントは常に日本語で丁寧に回答してください。詳細な実装方針は `PLAN.md` を参照してください。
+実装変更を行った際は関連する `.md`（AGENTS, PLAN, CLI, README など）を必ず精査し、内容を同期更新してください。
 This project builds a CLI that pulls YouTube transcripts (or transcribes audio when none exist), summarizes them, and writes Obsidian-ready Markdown notes. 
 
 ## Project Structure & Module Organization

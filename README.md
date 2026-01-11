@@ -22,12 +22,9 @@ LANGUAGE=ja
 
 ## 使い方
 ```bash
-youtube2obsidian https://youtu.be/VIDEO_ID \
-  --vault ~/Obsidian/Vault \
-  --model gpt-4o-mini \
-  --whisper-model medium \
-  --lang ja
+youtube2obsidian https://youtu.be/VIDEO_ID
 ```
+`.env` に `VAULT_PATH`, `LITELLM_MODEL`, `WHISPER_MODEL`, `LANGUAGE` を設定しておけば URL だけで実行できます。全文トランスクリプト埋め込みはデフォルトで有効です（不要なら `--no-include-transcript`）。
 
 主なオプション:
 - `--vault/-v PATH` : 保存先 Obsidian Vault パス（未指定時は環境変数）。
@@ -36,7 +33,7 @@ youtube2obsidian https://youtu.be/VIDEO_ID \
 - `--cache-dir PATH` : 音声・モデルキャッシュ。
 - `--lang CODE` : 処理/出力言語（デフォルト ja）。
 - `--overwrite` : 同名ノートを上書き。
-- `--include-transcript` : ノート末尾に全文トランスクリプトを含める。
+- `--include-transcript / --no-include-transcript` : ノート末尾に全文トランスクリプトを含める（デフォルトで含める）。
 - `--no-openai` : 要約せず全文のみ保存。
 
 ## 出力

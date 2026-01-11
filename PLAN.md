@@ -23,8 +23,9 @@ YouTube動画のURLを入力すると、可能なら字幕を取得し、なけ�
 6. Obsidian向けMarkdownをテンプレート化して保存。
 
 ## CLI仕様（例）
-- `python -m youtube2obsidian.cli <YouTube URL> --vault ~/Obsidian/Vault --model openai:gpt-4o-mini --whisper-model medium --lang ja --overwrite`
+- `python -m youtube2obsidian.cli <YouTube URL> --vault ~/Obsidian/Vault --model gpt-4o-mini --whisper-model medium --lang ja --overwrite`
 - オプション: `--cache-dir data/cache`, `--timeout`, `--max-tokens`, `--no-openai`（要約をスキップし全文保存するデグレード）。
+- `--include-transcript/--no-include-transcript`: デフォルトは含める。不要な場合のみ `--no-include-transcript` を指定。
 
 ## 出力フォーマット
 - 保存先: `<vault>/YouTube/<YYYY>/<YYYY-MM-DD> - <Title>.md`

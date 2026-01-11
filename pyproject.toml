@@ -1,0 +1,46 @@
+[project]
+name = "youtube2obsidian"
+version = "0.1.0"
+description = "CLI to fetch YouTube transcripts or transcribe audio, summarize, and save Obsidian-ready notes."
+readme = "AGENTS.md"
+requires-python = ">=3.11"
+dependencies = [
+    "typer[all]>=0.12.0",
+    "youtube-transcript-api>=0.6.2",
+    "yt-dlp>=2025.1.8",
+    "faster-whisper>=1.1.1",
+    "litellm>=1.50.0",
+    "pydantic>=2.6.0",
+    "python-dotenv>=1.0.1",
+    "rich>=13.7.0",
+    "tiktoken>=0.7.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "responses>=0.25.0",
+    "ruff>=0.6.0",
+    "mypy>=1.10.0",
+    "types-requests",
+    "pytest-mock",
+]
+
+[project.scripts]
+youtube2obsidian = "youtube2obsidian.cli:app"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "W", "C90"]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+strict = false
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"

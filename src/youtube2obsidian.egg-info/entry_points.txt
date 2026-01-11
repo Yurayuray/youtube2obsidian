@@ -1,0 +1,2 @@
+[console_scripts]
+youtube2obsidian = youtube2obsidian.cli:app

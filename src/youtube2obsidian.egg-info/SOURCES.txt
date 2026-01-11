@@ -1,0 +1,16 @@
+AGENTS.md
+pyproject.toml
+src/youtube2obsidian/__init__.py
+src/youtube2obsidian/cli.py
+src/youtube2obsidian/config.py
+src/youtube2obsidian/fetch.py
+src/youtube2obsidian/summarize.py
+src/youtube2obsidian/transcribe.py
+src/youtube2obsidian/writer.py
+src/youtube2obsidian.egg-info/PKG-INFO
+src/youtube2obsidian.egg-info/SOURCES.txt
+src/youtube2obsidian.egg-info/dependency_links.txt
+src/youtube2obsidian.egg-info/entry_points.txt
+src/youtube2obsidian.egg-info/requires.txt
+src/youtube2obsidian.egg-info/top_level.txt
+tests/test_placeholder.py

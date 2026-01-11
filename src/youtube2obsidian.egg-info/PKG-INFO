@@ -1,0 +1,60 @@
+Metadata-Version: 2.4
+Name: youtube2obsidian
+Version: 0.1.0
+Summary: CLI to fetch YouTube transcripts or transcribe audio, summarize, and save Obsidian-ready notes.
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: typer[all]>=0.12.0
+Requires-Dist: youtube-transcript-api>=0.6.2
+Requires-Dist: yt-dlp>=2025.1.8
+Requires-Dist: faster-whisper>=1.1.1
+Requires-Dist: litellm>=1.50.0
+Requires-Dist: pydantic>=2.6.0
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: rich>=13.7.0
+Requires-Dist: tiktoken>=0.7.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0.0; extra == "dev"
+Requires-Dist: responses>=0.25.0; extra == "dev"
+Requires-Dist: ruff>=0.6.0; extra == "dev"
+Requires-Dist: mypy>=1.10.0; extra == "dev"
+Requires-Dist: types-requests; extra == "dev"
+Requires-Dist: pytest-mock; extra == "dev"
+
+# Repository Guidelines
+
+## Project Scope
+エージェントは常に日本語で丁寧に回答してください。詳細な実装方針は `PLAN.md` を参照してください。
+This project builds a CLI that pulls YouTube transcripts (or transcribes audio when none exist), summarizes them, and writes Obsidian-ready Markdown notes. 
+
+## Project Structure & Module Organization
+- `src/youtube2obsidian/`: CLI entrypoint plus modules for transcript fetch (YouTube + `yt-dlp` fallback), transcription (Whisper/faster-whisper), summarization, formatting, and Obsidian writer.
+- `scripts/`: developer utilities such as sample runs, cache cleanup, or folder-watcher helpers.
+- `tests/`: pytest suites for each module and CLI integration smoke tests.
+- `data/cache/` (gitignored): downloaded audio, Whisper models, or temporary transcripts; keep vault paths out of git.
+- `.env.example`: documents required environment variables (API keys, vault hints); never commit real secrets.
+
+## Build, Test, and Development Commands
+- `python -m venv .venv && source .venv/bin/activate`
+- `pip install -e ".[dev]"` — installs core deps and lint/test tooling once `pyproject.toml` is in place.
+- `python -m youtube2obsidian.cli https://youtu.be/<id> --vault ~/Obsidian/Vault --model openai:gpt-4o` — run the full pipeline locally.
+- `pytest -q` — run unit and integration suites.
+- `ruff check .` / `ruff format .` — lint and format; format before commits.
+- `mypy src` — optional but encouraged on public interfaces.
+
+## Coding Style & Naming Conventions
+- Target Python 3.11+, PEP 8 aligned; snake_case for functions/vars, PascalCase for classes, kebab-case for CLI flags.
+- Require type hints and docstrings on public functions; prefer `TypedDict`/`dataclass` for structured payloads.
+- Use `logging` for diagnostics; avoid bare `print`.
+- Keep modules single-purpose (fetch, transcribe, summarize, write) to ease testing and maintenance.
+
+## Testing Guidelines
+- Use pytest with files named `test_*.py`; mirror module paths (e.g., `tests/test_summary.py` for `summary.py`).
+- Stub network/LLM calls; use cached sample transcripts/audio for deterministic tests.
+- Add an integration test that exercises the CLI on a short fixture video/transcript.
+
+## Commit & Pull Request Guidelines
+- History is new; follow Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`, `test:`, `refactor:`, `ci:`).
+- Keep PRs small with a clear summary, linked issue, and notes on model/API usage or cost-impacting changes.
+- Run lint and tests before opening; include output when changing pipelines.
+- Never commit secrets, local vault content, or large audio artifacts; prefer `.gitignore` entries for caches and vault paths.
